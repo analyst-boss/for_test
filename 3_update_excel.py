@@ -146,12 +146,12 @@ try:
             m_func.log(new_log_path, f'Начало обновления подключений: {str(datetime.datetime.today())}\n')
 
             # переменные для функции m_func.update_connect
-            pause_aftet_upd = config.pause_aftet_upd # пауза, которая берется после обновления подключения
+            pause_after_upd = config.pause_after_upd # пауза, которая берется после обновления подключения
             long_list_connections = config.long_list_connections # список подключений, после которых требуется больше паузы
-            long_pause_aftet_upd = config.long_pause_aftet_upd # увеличенная пауза после обновления покдлючений из списка long_list_connections
+            long_pause_after_upd = config.long_pause_after_upd # увеличенная пауза после обновления покдлючений из списка long_list_connections
             pause_aftet_error = config.pause_aftet_error # пауза, которая берется после падения обновления Excel
             # главная функция по обновлению excel
-            m_func.update_connect(list_connections, new_log_path, new_excel_path, pause_aftet_upd, long_list_connections, long_pause_aftet_upd, pause_aftet_error)
+            m_func.update_connect(list_connections, new_log_path, new_excel_path, pause_after_upd, long_list_connections, long_pause_after_upd, pause_aftet_error)
 
             # конец работы скрипта
             finish_play = datetime.datetime.now()
@@ -161,6 +161,9 @@ try:
 
 except Exception as e:
     m_func.log(new_log_path, f'Ошибка при отработке скрипта "3_update_excel.py": {str(e)}.\nЧитай файл с логами.\n')
+
+    # чтобы передать падение в вызываемый скрипт для падения самого скрипта
+    sys.exit(1)
                                                                 
 finally:
     # системное уведомление windows
